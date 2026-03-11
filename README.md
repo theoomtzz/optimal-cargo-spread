@@ -1,12 +1,13 @@
 # Optimal Cargo Spread 🚢🛢️
 
-**Dynamic optimization of the illiquidity premium (spread) for a physical commodity cargo using Markov Decision Processes (MDP) and Bellman's equation.**
+**Dynamic Optimization of the Trading Premium for a Physical Oil Cargo in Transit using a Markov Decision Process.**
+
 
 ![Dynamic Pricing Optimization Plot](cargo_spread_plot.png)
 
 ## Overview
 
-This repository explores a quantitative approach to physical commodity trading (e.g., Oil, LNG). Unlike financial trading where the goal is often to speculate on the underlying asset's price, physical trading heavily relies on optimizing the **illiquidity premium** (the spread) over the market benchmark before the cargo reaches its destination.
+This repository explores a quantitative approach to physical commodity trading (e.g., Oil, LNG). Unlike financial trading where the goal is often to speculate on the underlying asset's price, physical trading heavily relies on optimizing the **the trading premium (spread)** (the spread) over the market benchmark price before the cargo reaches its destination.
 
 This project implements a **Markov Decision Process (MDP)** to compute the optimal pricing strategy dynamically over time, comparing it against a naive fixed-premium strategy.
 
