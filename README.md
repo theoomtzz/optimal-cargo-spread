@@ -2,6 +2,8 @@
 
 **Dynamic optimization of the illiquidity premium (spread) for a physical commodity cargo using Markov Decision Processes (MDP) and Bellman's equation.**
 
+![Dynamic Pricing Optimization Plot](cargo_spread_plot.png)
+
 ## Overview
 
 This repository explores a quantitative approach to physical commodity trading (e.g., Oil, LNG). Unlike financial trading where the goal is often to speculate on the underlying asset's price, physical trading heavily relies on optimizing the **illiquidity premium** (the spread) over the market benchmark before the cargo reaches its destination.
@@ -12,16 +14,16 @@ This project implements a **Markov Decision Process (MDP)** to compute the optim
 
 The problem is structured as a discrete-time MDP solved via **Dynamic Programming (Backward Induction)**.
 
-* **State ($X_t$):** $1$ if the entire cargo is unsold (Block trade), $0$ if sold.
-* **Action:** Propose a new premium $p_t$ at each time step $t$.
-* **Liquidity / Probability of execution:** Instead of a linear probability, this model uses an exponential decay function $D(p_t) = A \cdot e^{-k \cdot p_t}$ (inspired by Avellaneda-Stoikov market making models) to realistically simulate how liquidity dries up as the premium increases.
+* **State ($X$):** $1$ if the entire cargo is unsold (Block trade), $0$ if sold.
+* **Action:** Propose a new premium $p_{T-s}$ at each backward time step $s$.
+* **Liquidity / Probability of execution:** Instead of a linear probability, this model uses an exponential decay function $D(p) = A \cdot e^{-k \cdot p}$ (inspired by Avellaneda-Stoikov market making models) to realistically simulate how liquidity dries up as the premium increases.
 * **Terminal Value ($W_T$):** If the cargo arrives at the port unsold, it is subject to a distress sale penalty (e.g., $W_T = 0.001$).
 
 ### Bellman Equation
 
-The expected return is updated backward from maturity $T$ to $t=0$:
+The expected wealth $W$ is updated backward from maturity $T$, moving backwards by step $s$:
 
-$$R(X_{t} = 1) = \max_{p_{t}} \left[ D(p_{t})(p_{t} + R(X_{t+1} = 0)) + (1 - D(p_{t}))(0 + R(X_{t+1} = 1)) \right]$$
+$$W(X_{T-s} = 1) = \max_{p_{T-s}} \left\{ D(p_{T-s}) p_{T-s} + (1 - D(p_{T-s})) W(X_{T-s+1} = 1) \right\}$$
 
 ## Counter-Intuitive Insight
 
