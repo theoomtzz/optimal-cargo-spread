@@ -23,7 +23,7 @@ The problem is structured as a discrete-time MDP solved via **Dynamic Programmin
 
 The expected wealth $W$ is updated backward from maturity $T$, moving backwards by step $s$:
 
-$$W(X_{T-s} = 1) = \max_{p_{T-s}} \left\{ D(p_{T-s}) p_{T-s} + (1 - D(p_{T-s})) W(X_{T-s+1} = 1) \right\}$$
+$$W(X_{T-s} = 1) = \max_{p_{T-s}} \left[ D(p_{T-s}) p_{T-s} + (1 - D(p_{T-s})) W(X_{T-s+1} = 1) \right]$$
 
 ## Counter-Intuitive Insight
 
